@@ -3,42 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to My GitHub Pages Site!</title>
+    <title>Academic Paper Layout | GitHub Pages</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/STLLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: "Georgia", serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
+            background-color: #A8AFB3; /* Light Grey */
             text-align: center;
+            line-height: 1.6;
+            padding-bottom: 100px; /* Adds space for the footer */
         }
-        h1 {
-            color: #333;
-            margin-top: 50px;
+        header {
+            background-color: #0058A3;
+            color: white;
+            padding: 20px;
+            font-size: 50px;
         }
-        p {
-            color: #555;
+        #stl-container {
+            display: flex;
+            justify-content: center; /* Horizontally center */
+            align-items: center;     /* Vertically center */
+            height: 400px;           /* Set a fixed height for the container */
+            width: 100%;             /* Full width */
+            margin: 0 auto;          /* Center the container horizontally on the page */
+            background-color: #A8AFB3; /* Optional: to see the background of the container */
         }
-        .content {
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 40px auto;
+            gap: 20px;
+        }
+        .column {
+            flex: 1;
+            min-width: 300px;
+            background: #d0d7dc;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        video, img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        canvas {
+            width: 100%;
+            height: 300px;
+            border-radius: 8px;
+            background: #ddd;
+        }
+        .links {
             margin-top: 20px;
         }
+        .links a {
+            display: block;
+            color: #0077cc;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
         footer {
+            margin-top: 30px;
+            padding: 10px;
+            background: #333;
+            color: white;
             position: fixed;
-            bottom: 10px;
+            bottom: 0;
             width: 100%;
-            text-align: center;
-            color: #888;
+            font-size: 14px;
+        }
+        .authors {
+            font-size: 16px;
+            color: #333;
+            margin-top: 20px;
+            font-style: italic;
+        }
+        .abstract {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #555;
+            line-height: 1.8;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 20px; /* Add padding to space the text from the edges */
+            text-align: left; /* Align the text to the left */
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to My GitHub Pages Site!</h1>
-    <div class="content">
-        <p>This is a simple test page hosted on GitHub Pages.</p>
-        <p>Feel free to modify and expand this page!</p>
+
+<header>Force Plates for Analyzing, Recording and Teaching Forces of Dis-/Assembly Processes for Robot Programming-by-Demonstration
+</header>
+<div class="authors">
+    <p><strong>Authors:</strong> Daniel Bargmann<sup>1</sup>, Werner Kraus<sup>1</sup>, Marco F. Huber<sup>1,2</sup></p>
+    <sup>1</sup>Fraunhofer Institute for Manufacturing Engineering and Automation (IPA), Stuttgart, Germany <br><sup>2</sup>Institute of Industrial Manufacturing and Management (IFF), University of Stuttgart, Germany</p>
+</div>
+
+<div class="container">
+
+    <div class="column">
+        <h2>Overview Video</h2>
+        <video controls>
+            <source src="CASE_Video_v01.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
-    <footer>
-        <p>Created with ❤️ by [Your Name]</p>
-    </footer>
+
+    <div class="column">
+        <h2>Application Video</h2>
+        <video controls>
+            <source src="case_web_3.webm" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+
+</div>
+
+<div class="abstract">
+    <p><strong>Abstract:</strong> 
+        Assembly tasks remain a challenge for industrial robots, as they involve physical contact where small path deviations can cause irreversible damage. While force control can mitigate such issues, tuning control parameters requires expert knowledge. LfD or IL offers a more intuitive alternative, but most force-based approaches rely on hand-guiding, requiring expensive cobots or raising safety concerns. Observation-based methods, in contrast, often depend on cameras and are limited to position control, suffering from occlusions and inaccuracies.
+
+        We propose a novel tool that estimates position from force signals, without cameras or direct robot interaction, to enable force-based programming of assembly tasks. Using a network of four force-torque sensors, our system detects contact position, direction, and magnitude, achieving sub-millimeter accuracy (\( \mathbf{<1~mm} \)) in relevant areas. Demonstrations include the force-based assembly of a snap-fit, occluded plug insertion, and terminal clamp assembly. A user study with 20 participants shows that our approach reduces teaching time for terminal clamps by \( \mathbf{61\%} \) compared to hand-guided methods, and lowers both mental load and perceived frustration by over \( \mathbf{40\%} \) each.  
+    </p>
+</div>
+<div class="column">
+    <h2>3D Model of the Force Plate</h2>
+    <div id="stl-container"></div>
+</div>
+
+
+
+<div class="links">
+    <h2>Project Links</h2>
+    <a href="https://github.com/ipa-danb" target="https://github.com/ipa-danb">🔗 GitHub Profile</a>
+    <a href="https://github.com/ipa-danb/assembly_force_plate" target="https://github.com/ipa-danb/assembly_force_plate">🔗 Project Repository</a>
+</div>
+
+<footer>
+    <p>Created by Daniel Bargmann | Hosted on GitHub Pages</p>
+</footer>
+
+<script>
+    // 3D Model Viewer
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setClearColor(0xd0d7dc);
+    renderer.setSize(500, 400);
+    document.getElementById('stl-container').appendChild(renderer.domElement);
+
+    // Lighting
+    const light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(5, 5, 5).normalize();
+    scene.add(light);
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+    // Load STL
+    const loader = new THREE.STLLoader();
+    loader.load('Kraftsensoren_Platte.STL', function (geometry) {
+        console.log("STL loaded successfully!");
+        const material = new THREE.MeshStandardMaterial({ color: 0x0077ff, metalness: 0.5, roughness: 0.5 });
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.scale.set(0.01, 0.01, 0.01);
+        scene.add(mesh);
+
+        // Centering the model to the scene
+        const bbox = new THREE.Box3().setFromObject(mesh);
+        const center = bbox.getCenter(new THREE.Vector3());
+        mesh.position.sub(center);
+
+        const size = bbox.getSize(new THREE.Vector3()).length();
+        camera.position.set(-size, size, -size); // Isometric camera position
+        camera.lookAt(0, 0, 0); // Make sure the camera is looking at the center of the scene
+
+        // Adjust camera position to fit the model
+        camera.position.z = Math.max(bbox.getSize(new THREE.Vector3()).length() * 1.5, 10); // Ensure the camera isn't too close
+        console.log("Camera position:", camera.position);
+        console.log("STL model centered!");
+    });
+
+    function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+        renderer.render(scene, camera);
+    }
+    animate();
+</script>
+
 </body>
 </html>
